@@ -5,7 +5,7 @@ require 'securerandom'
 
 # these are file location parameters for processing
 $data_root_folder = '/data'  # all images will be in here, both source and transformed
-$source_folder_name =  'RTO/For transforming 20151027' # within data root folder
+$source_folder_name =  'RTO/MRE11c' # within data root folder
 $image_file_ext = '.jpg'
 $create_colour_range = false
 $colour_transfrom_manifest = '100,300,96'
@@ -16,10 +16,10 @@ $processed_count = 0
 def transform_file(file, destination_folder)
   random_base_name = BSON::ObjectId.new
   name = file.split('/').last
-  collection = 'AK RAD50'
+  collection = 'MRE11c'
 
   id_no = name.split('.').first
-  stain_type = 'RAD50'
+  stain_type = 'MRE11'
   score = ''
   orig_file_name = name
   orig_directory = file
@@ -92,7 +92,7 @@ def transform_folder(source_folder, destination_folder)
   transform_files_in_folder(source_folder, destination_folder)
   # then do all subfolders
   Dir.entries(source_folder).each do |subfolder|
-    if File.directory? File.join(source_folder, subfolder) and !(subfolder =='.' || subfolder == '..')
+    if File.directory? File.join(source_folder, subfolder) and !(subfolder =='.' || subfolder == '..' || subfolder == 'Do not transform')
       transform_folder(File.join(source_folder, subfolder), File.join(destination_folder, subfolder))
     end
   end
