@@ -3,7 +3,7 @@
 ## Basic idea
 
 This Ruby script is used to process to transform tissue micro-array (TMA) images for use in
-Cancer Research UK's Reverse The Odds game.  It takes issues from a source folder, transforms them,
+Cancer Research UK's Reverse The Odds game.  It takes images from a source folder, transforms them,
 writes them out to a target folder and creates a file of image metadata to describe the transformed images.
 
 ## Image transformation
@@ -19,4 +19,40 @@ See online imagemagick documentation for details of parameters [http://www.image
 ## File processing
 
 Given a source folder the script recursively converts all images in that folder and all enclosed folders.
-The enclosed folder structure is preserved in the target folder
+The enclosed folder structure is preserved in the target folder.
+
+Each source image produces multiple target images (one for each of the segments).
+These are collected together in a folder that is named after the source image.
+In order to anonymise images a guid is used in place of the source image name.
+The mapping between source file name and guid is recorded in the metadata file.
+Each target image is named \<guid>_\<segment number>.jpg
+
+For 6x6 transformations the outer images are discarded resulting in only
+the central 4x4 set of image segments being saved.
+The reason for this is that the outer segments often contain very little tissue
+and so add little value to the analysis
+
+## Image metadata
+
+Image names are changed to ensure anonymity.  As a consequence any information encoded in the name is lost.
+To preserve this, and add extra metadata, a metadata file (manifest.json) is created as part of the transformation process.
+Some metadata is image specific, other is common to the whole batch of images being transformed.
+Common metadata values are set as constants within the script:
+ - collection - the name of the collection from which these images was taken
+ - stain_type - the type of stain used in the images
+
+## Changing transformation behaviour
+
+The script has been written so that it is easy to change its behaviour in certain areas:
+
+- source folder
+- target folder
+- source image type (jpeg, tiff)
+- transformation details
+
+These are all set up as constants at the top of the script and can be changed as needed
+
+Normally the script creates only one version of the transformed image.    However there is an option to create a range
+of transformed images with different transformations.  This can be useful when experimenting with new image types to find an optimal transformation.
+To switch this mode on set $create_colour_range to true
+
