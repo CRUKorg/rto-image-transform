@@ -2,7 +2,7 @@
 
 ## Basic idea
 
-This Ruby script is used to process to transform tissue micro-array (TMA) images for use in
+This Ruby script is used to  transform tissue micro-array (TMA) images for use in
 Cancer Research UK's Reverse The Odds game.  It takes images from a source folder, transforms them,
 writes them out to a target folder and creates a file of image metadata to describe the transformed images.
 
