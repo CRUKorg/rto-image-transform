@@ -1,10 +1,14 @@
-# CRUK Reverse The Odds image transformation code
+# CRUK Reverse The Odds image transformation script
 
 ## Basic idea
 
 This Ruby script is used to process to transform tissue micro-array (TMA) images for use in
 Cancer Research UK's Reverse The Odds game.  It takes images from a source folder, transforms them,
 writes them out to a target folder and creates a file of image metadata to describe the transformed images.
+
+## Prerequisites
+
+imagemagick (6.9.3-0 or later) must be installed.  Can be downloaded from [http://www.imagemagick.org/script/binary-releases.php]
 
 ## Image transformation
 
@@ -55,4 +59,15 @@ These are all set up as constants at the top of the script and can be changed as
 Normally the script creates only one version of the transformed image.    However there is an option to create a range
 of transformed images with different transformations.  This can be useful when experimenting with new image types to find an optimal transformation.
 To switch this mode on set $create_colour_range to true
+
+## Copyright / Licence
+
+Copyright 2016 Cancer Research UK
+
+Source Code License: The GNU Affero General Public License, either version 3 of the License or (at your option) any later version. (See agpl.txt file)
+
+The GNU Affero General Public License is a free, copyleft license for software and other kinds of works, specifically designed to ensure
+cooperation with the community in the case of network server software.
+
+Documentation is under a Creative Commons Attribution License version 3.
 
